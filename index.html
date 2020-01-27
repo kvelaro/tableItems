@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="item-table"></div>
+    </body>
+    <script src="./js/table-item.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let itemTable = document.querySelector('.item-table');
+            let table = tableItems({
+                data: [
+                    {name: 'qwerty', count: 1},
+                    {name: 'qwerty2', count: 2},
+                    {name: 'qwerty3', count: 3},
+                ],
+                selector: itemTable,
+                debuggy: true,
+                addModalContent: `<label>select something</label>
+                                    <select>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    </select>`
+            });
+
+            table.on('tableItem.ready', function() {
+                console.log('initialized in user end')
+            })
+            table.on('click', () => {
+                console.log('click handler in user end')
+            })
+            itemTable.insertAdjacentHTML('beforeend', table.draw());
+        });
+    </script>
+</html>
